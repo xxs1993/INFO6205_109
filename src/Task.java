@@ -9,7 +9,7 @@ public class Task {
         //TODO: random usingTimeList
     }
 
-    public static Task getInstance(int taskNum){
+    public Task getInstance(int taskNum){
         if(task == null){
             task = new Task(taskNum);
         }
