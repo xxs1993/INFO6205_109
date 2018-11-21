@@ -4,7 +4,7 @@ public class Chromesome implements Comparable<Chromesome> {
 
     private int collocationDegree;
 
-    private List<Integer> genes;
+    private List<Server> genes;
 
     public int getCollocationDegree() {
         return collocationDegree;
@@ -14,11 +14,11 @@ public class Chromesome implements Comparable<Chromesome> {
         this.collocationDegree = collocationDegree;
     }
 
-    public List<Integer> getGenes() {
+    public List<Server> getGenes() {
         return genes;
     }
 
-    public void setGenes(List<Integer> genes) {
+    public void setGenes(List<Server> genes) {
         this.genes = genes;
     }
 
