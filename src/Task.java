@@ -4,9 +4,20 @@ import java.util.Random;
 public class Task {
     private int usingTime;
 
-    public Task(){
+    private int id;
+
+    public Task(int id){
         Random random = new Random();
         this.usingTime = random.nextInt(100);
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getUsingTime() {

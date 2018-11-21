@@ -1,14 +1,18 @@
+import java.util.List;
 
 public class Reproduction {
-    public static Chromesome getNextGeneration(Chromesome fa , Chromesome mo){
+
+    public static List<Chromosome> getNextGeneration(List<Chromosome> list){return null;}
+
+    private static Chromosome getNextGeneration(Chromosome fa , Chromosome mo){
         return null;
     }
 
-    private static Chromesome mutate(Chromesome fa , Chromesome mo){
+    private static Chromosome mutate(Chromosome fa , Chromosome mo){
         return null;
     }
 
-    private static Chromesome crossover(Chromesome fa , Chromesome mo){
+    private static Chromosome crossover(Chromosome fa , Chromosome mo){
         return null;
     }
 }

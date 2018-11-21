@@ -1,5 +1,5 @@
 public class GAConfiguration {
-    public static double copySolutionProp = 0.2;
+    public static double crossSolutionProp = 0.7;
 
     public static int recursiveTimes = 100;
 }
