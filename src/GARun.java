@@ -5,11 +5,11 @@ import java.util.Random;
 public class GARun {
    private static final List<Task> tasks = new ArrayList<>();
    private static final List<Server> servers = new ArrayList<>();
-   private int tastNum;
+   private int taskNum;
    private int serverNum;
    private int solutionNum ;
    public GARun(int taskNum,int serverNum,int solutionNum){
-       this.tastNum = taskNum;
+       this.taskNum = taskNum;
        this.serverNum = serverNum;
        this.solutionNum = solutionNum;
        for(int i = 0; i< taskNum;i++){
@@ -33,7 +33,7 @@ public class GARun {
        Chromosome chromosome = new Chromosome();
        List<Server> genes = new ArrayList<>();
        Random random = new Random();
-       for(int i = 0;i<tastNum;i++){
+       for(int i = 0; i< taskNum; i++){
            int index = random.nextInt(serverNum);
            genes.add(servers.get(index));
        }
