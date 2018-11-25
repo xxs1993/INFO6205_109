@@ -2,7 +2,7 @@ import java.util.List;
 
 public class Reproduction {
 
-    public static List<Chromosome> getNextGeneration(List<Chromosome> list){return null;}
+    public static List<Chromosome> getNextGeneration(List<Chromosome> list){return list;}
 
     private static Chromosome getNextGeneration(Chromosome fa , Chromosome mo){
         return null;

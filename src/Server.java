@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -28,6 +29,7 @@ public class Server {
     public Server(int taskNum,int id){
         this.id = id;
         Random random = new Random();
+        executingSpeedList = new ArrayList<>();
         for(int i = 0;i<taskNum;i++){
             executingSpeedList.add(random.nextInt(20));
         }

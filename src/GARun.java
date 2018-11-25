@@ -21,6 +21,10 @@ public class GARun {
        }
    }
 
+    /**
+     * initiate the first generation
+     * @return
+     */
    private List<Chromosome> initChromosomes( ){
        List<Chromosome> list = new ArrayList<>();
        for(int i=0;i<2*solutionNum;i++){
@@ -29,6 +33,10 @@ public class GARun {
        return list;
    }
 
+    /**
+     * build single chromosome
+     * @return
+     */
    private Chromosome buildChromosome(){
        Chromosome chromosome = new Chromosome();
        List<Server> genes = new ArrayList<>();
@@ -42,15 +50,26 @@ public class GARun {
        return chromosome;
    }
 
+    /**
+     * get all solutions
+     * @return
+     */
    public List<Chromosome> getSololutions(){
        List<Chromosome> chromosomes = initChromosomes();
        int i =0;
        while (i < GAConfiguration.recursiveTimes){
            chromosomes = recursiveSolutions(chromosomes);
+           i++;
+           System.out.println("generation : "+i);
        }
        return chromosomes;
    }
 
+    /**
+     * get next generations
+     * @param list
+     * @return
+     */
    private List<Chromosome> recursiveSolutions(List<Chromosome> list){
        List<Chromosome> newList = new ArrayList<>();
        list.sort(null);
