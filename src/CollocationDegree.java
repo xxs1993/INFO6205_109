@@ -7,5 +7,9 @@ public class CollocationDegree {
         return 0;
     }
 
+    public static List<Chromosome> selectParentsChromosome(List<Chromosome> list){
+        //TODO: select parent chromosome
+        return null;
+    }
 
 }
