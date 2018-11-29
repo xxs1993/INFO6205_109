@@ -8,7 +8,40 @@ public class GARun {
    private int taskNum;
    private int serverNum;
    private int solutionNum ;
-   public GARun(int taskNum,int serverNum,int solutionNum){
+
+    public  List<Task> getTasks() {
+        return tasks;
+    }
+
+    public  List<Server> getServers() {
+        return servers;
+    }
+
+    public int getTaskNum() {
+        return taskNum;
+    }
+
+    public void setTaskNum(int taskNum) {
+        this.taskNum = taskNum;
+    }
+
+    public int getServerNum() {
+        return serverNum;
+    }
+
+    public void setServerNum(int serverNum) {
+        this.serverNum = serverNum;
+    }
+
+    public int getSolutionNum() {
+        return solutionNum;
+    }
+
+    public void setSolutionNum(int solutionNum) {
+        this.solutionNum = solutionNum;
+    }
+
+    public GARun(int taskNum, int serverNum, int solutionNum){
        this.taskNum = taskNum;
        this.serverNum = serverNum;
        this.solutionNum = solutionNum;
@@ -54,7 +87,7 @@ public class GARun {
      * get all solutions
      * @return
      */
-   public List<Chromosome> getSololutions(){
+   public List<Chromosome> getSolutions(){
        List<Chromosome> chromosomes = initChromosomes();
        int i =0;
        while (i < GAConfiguration.recursiveTimes){

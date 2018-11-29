@@ -1,5 +1,4 @@
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -7,7 +6,7 @@ import java.util.Random;
 
 public class Reproduction {
 
-    public static List<Chromosome> getNextGeneration(List<Chromosome> list){return null;}
+    public static List<Chromosome> getNextGeneration(List<Chromosome> list){return list;}
 
     private static Chromosome getNextGeneration(Chromosome fa , Chromosome mo){
         return null;
@@ -33,33 +32,20 @@ public class Reproduction {
     }
 
     private static Chromosome crossover(Chromosome fa , Chromosome mo){
-        int N=0;
+        int N= fa.getGenes().size();
         Chromosome son = new Chromosome();
         Random random = new Random();
-        for (Server item : fa.getGenes()) {
-            N++;
-                    }
-        Iterator<Server> he = fa.getGenes().iterator();
-        Iterator<Server> she = mo.getGenes().iterator();
         int c = random.nextInt(2);
 
         if(c==0){
-        for(int i=1;i<=N/2;i++) {
-         son.getGenes().add(he.next());
-        }
-        for(int i=1;i<=N/2;i++) {
-         son.getGenes().add(she.next());
-            }
+            son.getGenes().addAll(fa.getGenes().subList(0,N/2));
+            son.getGenes().addAll(mo.getGenes().subList(N/2,N));
 
         }
         else
         {
-            for(int i=1;i<=N/2;i++) {
-                son.getGenes().add(she.next());
-            }
-            for(int i=1;i<=N/2;i++) {
-                son.getGenes().add(he.next());
-            }
+            son.getGenes().addAll(mo.getGenes().subList(0,N/2));
+            son.getGenes().addAll(fa.getGenes().subList(N/2,N));
         }
         return son;
     }

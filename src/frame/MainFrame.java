@@ -1,4 +1,3 @@
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -108,9 +107,17 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
        GARun  gaRun = new GARun(Integer.parseInt(taskNumber.getText()),Integer.parseInt(serversNumber.getText()),20);
         System.out.printf("start");
-       List<Chromosome> list = gaRun.getSololutions();
+       List<Chromosome> list = gaRun.getSolutions();
         System.out.printf("end");
         List<String> list1 = new ArrayList<>();
+        list1.add("Task using time:");
+        String[] tasks = gaRun.getTasks().stream().map(x->String.valueOf(x.getUsingTime()))
+                .toArray(size->new String[size]);
+        list1.add(Arrays.toString(tasks));
+        list1.add("Servers exceeding speeds :");
+        gaRun.getServers().stream().map(x-> x.getExecutingSpeedList()).forEach(x-> list1.add(Arrays.toString(x.toArray())));
+        list1.add(" Server Solutions");
+
         for(Chromosome chromosome :list){
             int[] idList = chromosome.getGenes().stream().mapToInt(Server ::getId).toArray();
             list1.add(Arrays.toString(idList));
