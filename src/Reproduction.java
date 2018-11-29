@@ -15,15 +15,13 @@ public class Reproduction {
     private static Chromosome mutate(Chromosome fa , Chromosome mo){
         Chromosome son = crossover( fa , mo);
         Random random = new Random();
-        int N=0;
-        for (Server item : fa.getGenes()) {
-            N++;
-        }
+        int N=fa.getGenes().size();
+
         int times = random.nextInt(N);
         for(int i=0; i<times; i++)
         {
             int posit = random.nextInt(N);
-            int number = random.nextInt(20);
+            int number = random.nextInt(GAConfiguration.server_exceeding_speed_range);
             Server server = new Server(N,number);
             son.getGenes().set(N, server);
         }

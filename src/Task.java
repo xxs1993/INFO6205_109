@@ -8,7 +8,7 @@ public class Task {
 
     public Task(int id){
         Random random = new Random();
-        this.usingTime = random.nextInt(100);
+        this.usingTime = random.nextInt(GAConfiguration.task_using_time_range);
         this.id = id;
     }
 

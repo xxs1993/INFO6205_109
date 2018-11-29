@@ -89,10 +89,8 @@ public class GARun {
      */
    public List<Chromosome> getSolutions(){
        List<Chromosome> chromosomes = initChromosomes();
-       int i =0;
-       while (i < GAConfiguration.recursiveTimes){
+       for (int i = 0;i < GAConfiguration.recursiveTimes;i++){
            chromosomes = recursiveSolutions(chromosomes);
-           i++;
            System.out.println("generation : "+i);
        }
        return chromosomes;
@@ -113,4 +111,6 @@ public class GARun {
        newList.addAll(Reproduction.getNextGeneration(crossChromosomes));
        return newList;
    }
+
+
 }

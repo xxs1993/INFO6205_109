@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,6 +31,8 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         serversNumber = new javax.swing.JTextField();
         start = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        solutionNumber = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,6 +64,16 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel3.setText("Number of Solutions");
+
+        solutionNumber.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        solutionNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                solutionNumberActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,18 +85,25 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
                 .addGap(134, 134, 134)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(serversNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
-                    .addComponent(taskNumber))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(serversNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+                        .addComponent(solutionNumber))
+                    .addComponent(taskNumber, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(137, 137, 137))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(242, 242, 242)
+                .addGap(144, 144, 144)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(solutionNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(taskNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -105,9 +125,22 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
         // TODO add your handling code here:
-       GARun  gaRun = new GARun(Integer.parseInt(taskNumber.getText()),Integer.parseInt(serversNumber.getText()),20);
+        String task = taskNumber.getText();
+        String server = serversNumber.getText();
+        String solution = solutionNumber.getText();
+        if(task.isEmpty() || server.isEmpty()|| solution.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Input can't be blank!!","Warining",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+         GARun  gaRun ;
+         try{
+              gaRun = new GARun(Integer.parseInt(task),Integer.parseInt(server),Integer.parseInt(solution));
+         }catch(NumberFormatException e){
+              JOptionPane.showMessageDialog(null,"Input must be numbers!!","Warining",JOptionPane.WARNING_MESSAGE);
+              return;
+         }
         System.out.printf("start");
-       List<Chromosome> list = gaRun.getSolutions();
+        List<Chromosome> list = gaRun.getSolutions().subList(0,Integer.parseInt(solution));
         System.out.printf("end");
         List<String> list1 = new ArrayList<>();
         list1.add("Task using time:");
@@ -128,6 +161,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void taskNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskNumberActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_taskNumberActionPerformed
+
+    private void solutionNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solutionNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_solutionNumberActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,7 +205,9 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField serversNumber;
+    private javax.swing.JTextField solutionNumber;
     private javax.swing.JButton start;
     private javax.swing.JTextField taskNumber;
     // End of variables declaration//GEN-END:variables
