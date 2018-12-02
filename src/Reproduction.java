@@ -36,9 +36,7 @@ public class Reproduction {
     private static Chromosome mutate(Chromosome son){
         Random random = new Random();
         int N=0;
-        for (Server item : son.getGenes()) {
-            N++;
-        }
+        N = son.getGenes().size();
         //int times = random.nextInt(N);
         for(int i=0; i<N; i++)
         {
@@ -57,9 +55,7 @@ public class Reproduction {
         int N=0;
         Chromosome son = new Chromosome();
         Random random = new Random();
-        for (Server item : fa.getGenes()) {
-            N++;
-                    }
+        N = fa.getGenes().size();
         Iterator<Server> he = fa.getGenes().iterator();
         Iterator<Server> she = mo.getGenes().iterator();
         int c = random.nextInt(2);
