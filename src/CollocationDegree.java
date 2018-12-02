@@ -10,60 +10,62 @@ public class CollocationDegree {
             Server server = genes.get(i);
             int usingTime = task.getUsingTime();
             int speed = server.getExecutingSpeedList().get(i);
-            double time = usingTime / speed;
+            //TODO:
+            double time = new Double(usingTime) / new Double(speed);
             if (map.get(server.getId()) == null) {
                 map.put(server.getId(), time);
                 continue;
             }
             map.put(server.getId(), map.get(server.getId()) + time);
         }
-        //TODO : get longest time
         double longestTime = 0;
-
+        for(double i: map.values()){
+            if(i > longestTime) longestTime = i;
+        }
         return getCollocationDegreeByTime(longestTime);
 
     }
 
 
-    //quicksort
-    public static int getMiddle(int[] numbers, int low,int high) //find the middle（lowest）
-    {
-        int temp = numbers[low];
-        while(low < high)
-        {
-            while(low < high && numbers[high] >= temp)
-            {
-                high--;
-            }
-            numbers[low] = numbers[high];
-            while(low < high && numbers[low] < temp)
-            {
-                low++;
-            }
-            numbers[high] = numbers[low] ;
-        }
-        numbers[low] = temp ;
-        return low ;
-    }
-
-    public static void quickSort(int[] numbers,int low,int high)  //recursive order
-    {
-        if(low < high)
-        {
-            int middle = getMiddle(numbers,low,high);
-            quickSort(numbers, low, middle-1);
-            quickSort(numbers, middle+1, high);
-        }
-
-    }
-
-    public static void quick(double numbers)
-    {
-        if(numbers.length > 0)   //check if the array is 0;
-        {
-            quickSort(numbers, 0, numbers.length-1);
-        }
-    }
+//    //quicksort
+//    public static int getMiddle(int[] numbers, int low,int high) //find the middle（lowest）
+//    {
+//        int temp = numbers[low];
+//        while(low < high)
+//        {
+//            while(low < high && numbers[high] >= temp)
+//            {
+//                high--;
+//            }
+//            numbers[low] = numbers[high];
+//            while(low < high && numbers[low] < temp)
+//            {
+//                low++;
+//            }
+//            numbers[high] = numbers[low] ;
+//        }
+//        numbers[low] = temp ;
+//        return low ;
+//    }
+//
+//    public static void quickSort(int[] numbers,int low,int high)  //recursive order
+//    {
+//        if(low < high)
+//        {
+//            int middle = getMiddle(numbers,low,high);
+//            quickSort(numbers, low, middle-1);
+//            quickSort(numbers, middle+1, high);
+//        }
+//
+//    }
+//
+//    public static void quick(double numbers)
+//    {
+//        if(numbers.length > 0)   //check if the array is 0;
+//        {
+//            quickSort(numbers, 0, numbers.length-1);
+//        }
+//    }
 
 
 
@@ -92,7 +94,6 @@ public class CollocationDegree {
         result.add(list.get(index1));
         result.add(list.get(index2));
 
-        //TODO: find index in which range
 
 
         return result;

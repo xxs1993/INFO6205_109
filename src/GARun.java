@@ -79,7 +79,7 @@ public class GARun {
            genes.add(servers.get(index));
        }
        chromosome.setGenes(genes);
-       chromosome.setCollocationDegree(CollocationDegree.getCollocationDegreeByGenes(genes));
+       chromosome.setCollocationDegree(CollocationDegree.getCollocationDegreeByGenes(genes,tasks));
        return chromosome;
    }
 
