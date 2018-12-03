@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 
 /**
@@ -125,6 +124,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
         // TODO add your handling code here:
+        start.setEnabled(false);
+        start.setText("Processing");
         String task = taskNumber.getText();
         String server = serversNumber.getText();
         String solution = solutionNumber.getText();
@@ -153,9 +154,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         for(Chromosome chromosome :list){
             int[] idList = chromosome.getGenes().stream().mapToInt(Server ::getId).toArray();
-            list1.add(Arrays.toString(idList));
+            double time = 0;
+
+            list1.add(Arrays.toString(idList) + " degree : "+ chromosome.getCollocationDegree());
         }
         FileUtil.writeData(list1);
+        JOptionPane.showMessageDialog(null,"Finished","Info",JOptionPane.INFORMATION_MESSAGE);
+        start.setText("Start");
+        start.setEnabled(true);
     }//GEN-LAST:event_startActionPerformed
 
     private void taskNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskNumberActionPerformed

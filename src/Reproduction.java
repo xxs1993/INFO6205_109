@@ -41,16 +41,14 @@ public class Reproduction {
         Server newserver;
         int N=0;
         N = son.getGenes().size();
-        List<Server> newgene = new ArrayList<Server>();
+        List<Server> newgene = son.getGenes();
         for(int i=0; i<N; i++) {
             int chance = random.nextInt(100);
             if (chance < 3) {
                 int id = random.nextInt(serverN);
                 newserver = server.get(id);
-                newgene.add(newserver);
+                newgene.set(i,newserver);
             }
-            newserver = son.getGenes().get(i);
-            newgene.add(newserver);
         }
         son.setGenes(newgene);
         return son;
@@ -61,8 +59,7 @@ public class Reproduction {
         Chromosome son = new Chromosome();
         Random random = new Random();
         N = fa.getGenes().size();
-        Iterator<Server> he = fa.getGenes().iterator();
-        Iterator<Server> she = mo.getGenes().iterator();
+        son.setGenes(new ArrayList<>());
         int c = random.nextInt(2);
 
         if(c==0){

@@ -11,7 +11,12 @@ public class CollocationDegree {
             int usingTime = task.getUsingTime();
             int speed = server.getExecutingSpeedList().get(i);
             //TODO:
-            double time = new Double(usingTime) / new Double(speed);
+            double time;
+            if(speed == 0){
+                time = Integer.MAX_VALUE/10;
+            }else {
+                time  =new Double(usingTime) ;
+            }
             if (map.get(server.getId()) == null) {
                 map.put(server.getId(), time);
                 continue;
@@ -70,22 +75,21 @@ public class CollocationDegree {
 
 
     private static int getCollocationDegreeByTime(double time){
-        return new Double(time * 100).intValue();
+        return new Double(1/time * 10000).intValue();
     }
 
     public static List<Chromosome> fitness(List<Chromosome> list){
         //TODO: select parent chromosome
         List<Chromosome> result = new ArrayList<>();
-        int collocationDegreeSum  = 0;
-        int[] range = new int[list.size()];
+        double collocationDegreeSum  = 0;
+        double[] range = new double[list.size()];
         for(int i = 0;i<list.size();i++){
             Chromosome chromosome = list.get(i);
             collocationDegreeSum = chromosome.getCollocationDegree()+ collocationDegreeSum;
             range[i] = collocationDegreeSum;
         }
-        Random random = new Random();
-        int r1 = random.nextInt(collocationDegreeSum);
-        int r2 = random.nextInt(collocationDegreeSum);
+        double r1 = collocationDegreeSum * Math.random();
+        double r2 = collocationDegreeSum * Math.random();
         int mid = list.size()/2;
 
         int index1 =getSelectedIndex(mid,range,r1);
@@ -99,7 +103,7 @@ public class CollocationDegree {
         return result;
     }
 
-    private  static int getSelectedIndex(int mid,int[]range,int r){
+    public   static int getSelectedIndex(int mid,double[]range,double r){
         while (mid > 0 ){
             if(range[mid]>r ){
                 if(mid == 0) break;

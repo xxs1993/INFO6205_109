@@ -31,7 +31,7 @@ public class Server {
         Random random = new Random();
         executingSpeedList = new ArrayList<>();
         for(int i = 0;i<taskNum;i++){
-            executingSpeedList.add(random.nextInt(GAConfiguration.server_exceeding_speed_range));
+            executingSpeedList.add(random.nextInt(GAConfiguration.server_exceeding_speed_range)+1);
         }
     }
 }
