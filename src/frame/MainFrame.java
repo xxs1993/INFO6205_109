@@ -149,17 +149,16 @@ public class MainFrame extends javax.swing.JFrame {
                 .toArray(size->new String[size]);
         list1.add(Arrays.toString(tasks));
         list1.add("Servers exceeding speeds :");
-        gaRun.getServers().stream().map(x-> x.getExecutingSpeedList()).forEach(x-> list1.add(Arrays.toString(x.toArray())));
+        gaRun.getServers().stream().forEach(x-> list1.add(x.getId() +" : " + Arrays.toString(x.getExecutingSpeedList().toArray())));
         list1.add(" Server Solutions");
 
         for(Chromosome chromosome :list){
             int[] idList = chromosome.getGenes().stream().mapToInt(Server ::getId).toArray();
-            double time = 0;
 
             list1.add(Arrays.toString(idList) + " degree : "+ chromosome.getCollocationDegree());
         }
-        FileUtil.writeData(list1);
-        JOptionPane.showMessageDialog(null,"Finished","Info",JOptionPane.INFORMATION_MESSAGE);
+        String fileName = FileUtil.writeData(list1);
+        JOptionPane.showMessageDialog(null,"Finished and fileName is : " +fileName,"Info",JOptionPane.INFORMATION_MESSAGE);
         start.setText("Start");
         start.setEnabled(true);
     }//GEN-LAST:event_startActionPerformed
