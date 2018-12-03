@@ -90,10 +90,9 @@ public class CollocationDegree {
         }
         double r1 = collocationDegreeSum * Math.random();
         double r2 = collocationDegreeSum * Math.random();
-        int mid = list.size()/2;
 
-        int index1 =getSelectedIndex(mid,range,r1);
-        int index2 =getSelectedIndex(mid,range,r2) ;
+        int index1 =getSelectedIndex(range,r1);
+        int index2 =getSelectedIndex(range,r2) ;
 
         result.add(list.get(index1));
         result.add(list.get(index2));
@@ -103,12 +102,13 @@ public class CollocationDegree {
         return result;
     }
 
-    public   static int getSelectedIndex(int mid,double[]range,double r){
+    public   static int getSelectedIndex(double[]range,double r){
+        int mid = range.length/2;
         while (mid > 0 ){
             if(range[mid]>r ){
                 if(mid == 0) break;
                 if(range[--mid] < r) {
-                   return mid;
+                   return mid+1;
                 }
             }else if(range[mid] <r){
                 if(range[++mid]>r){

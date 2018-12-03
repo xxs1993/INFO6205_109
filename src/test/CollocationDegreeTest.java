@@ -1,12 +1,8 @@
-
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.Before; 
 import org.junit.After;
-import org.omg.PortableInterceptor.ServerIdHelper;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +39,7 @@ public void testGetCollocationDegreeByGenes() throws Exception {
         genes.add(gaRun.getServers().get(i));
     }
     List<Server> genes2 = genes;
+
     int degree =  CollocationDegree.getCollocationDegreeByGenes(genes,gaRun.getTasks());
     int degree2 = CollocationDegree.getCollocationDegreeByGenes(genes2,gaRun.getTasks());
     Assert.assertTrue(degree >0);
@@ -56,7 +53,18 @@ public void testGetCollocationDegreeByGenes() throws Exception {
 */ 
 @Test
 public void testFitness() throws Exception { 
-//TODO: Test goes here... 
+//TODO: Test goes here...
+    List<Chromosome> chromosomes = new ArrayList<>();
+    Chromosome c1 = new Chromosome();
+    List<Server> genes = new ArrayList<>();
+    for(int i=0;i< gaRun.getTaskNum();i++){
+        genes.add(gaRun.getServers().get(i));
+    }
+    c1.setGenes(genes);
+    c1.setCollocationDegree(CollocationDegree.getCollocationDegreeByGenes(genes,gaRun.getTasks()));
+    chromosomes.add(c1);
+    List<Chromosome> list = CollocationDegree.fitness(chromosomes);
+    Assert.assertNotNull(list);
 } 
 
 
@@ -69,7 +77,21 @@ public void testFitness() throws Exception {
 */ 
 @Test
 public void testGetSelectedIndex() throws Exception { 
-//TODO: Test goes here... 
+//TODO: Test goes here...
+    double range[] = new double[5];
+    range[0] = 5;
+    range[1] = 10;
+    range[2] = 15;
+    range[3] = 20;
+    range[4] = 25;
+    int index = CollocationDegree.getSelectedIndex(range,14);
+    int index2 = CollocationDegree.getSelectedIndex(range,24);
+    int index3 = CollocationDegree.getSelectedIndex(range,15);
+
+    Assert.assertEquals(2,index);
+    Assert.assertEquals(4,index2);
+    Assert.assertEquals(3,index3);
+
 
 } 
 

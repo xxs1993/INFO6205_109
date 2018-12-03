@@ -9,23 +9,37 @@ import java.util.Random;
 public class Reproduction {
 
     public static List<Chromosome> getNextGeneration(List<Chromosome> list, List<Server> server, List<Task> task){
-        List<Chromosome> newlist = new ArrayList<Chromosome>();
+         List<Chromosome> newlist = new ArrayList<>();
         for(int i=0;i<list.size();i++) {
-        List<Chromosome> temlist = CollocationDegree.fitness(list);
-        Chromosome fa = temlist.get(0);
-        Chromosome ma = temlist.get(1);
-        //List<Chromosome> newlist = new ;
-        Chromosome son1 = getNextGeneration(fa,ma,server);
-        son1.setCollocationDegree(CollocationDegree.getCollocationDegreeByGenes(son1.getGenes(),task));
-        Chromosome son2 = getNextGeneration(fa,ma,server);
-        son2.setCollocationDegree(CollocationDegree.getCollocationDegreeByGenes(son2.getGenes(),task));
-        newlist.add(son1);
-        newlist.add(son2);
+            List<Chromosome> temlist = CollocationDegree.fitness(list);
+            Chromosome fa = temlist.get(0);
+            Chromosome ma = temlist.get(1);
+            //List<Chromosome> newlist = new ;
+            Chromosome son1 = getNextGeneration(fa, ma, server);
+            son1.setCollocationDegree(CollocationDegree.getCollocationDegreeByGenes(son1.getGenes(), task));
+            Chromosome son2 = getNextGeneration(fa, ma, server);
+            son2.setCollocationDegree(CollocationDegree.getCollocationDegreeByGenes(son2.getGenes(), task));
+            newlist.add(son1);
+            newlist.add(son2);
         }
-        int N = newlist.size();
-        newlist.sort(null);
-        newlist = newlist.subList(N/2,N);
-        return newlist;
+        return pick(newlist);
+    }
+
+    private static List<Chromosome> pick (List<Chromosome> list){
+        List<Chromosome> result = new ArrayList<>();
+        Random random = new Random();
+        while(result.size() <list.size()/2){
+            Chromosome c1 = list.get(random.nextInt(list.size()));
+            Chromosome c2 = list.get(random.nextInt(list.size()));
+            if(c1.getCollocationDegree()>=c2.getCollocationDegree()){
+                result.add(c1);
+                list.remove(c1);
+            } else {
+                result.add(c2);
+                list.remove(c2);
+            }
+        }
+        return result;
     }
 
     private static Chromosome getNextGeneration(Chromosome fa , Chromosome mo,List<Server> server){

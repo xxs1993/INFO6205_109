@@ -82,6 +82,7 @@ public class GARun {
        return chromosome;
    }
 
+
     /**
      * get all solutions
      * @return
@@ -99,8 +100,7 @@ public class GARun {
        chromosomes = map.get("mature");
        chromosomes.addAll(map.get("toBeMature"));
        chromosomes.sort(null);
-       System.out.println(chromosomes.get(chromosomes.size()-1).getCollocationDegree());
-       return chromosomes.subList(0,solutionNum);
+       return chromosomes.subList(chromosomes.size()-solutionNum,chromosomes.size());
    }
 
     private Map<String,List<Chromosome>> survive(Map<String,List<Chromosome>> map){
@@ -151,6 +151,7 @@ public class GARun {
        List<Chromosome> copyChromosomes  = list.subList(dividerIndex,list.size());
        newList.addAll(copyChromosomes);
        crossChromosomes = Reproduction.getNextGeneration(crossChromosomes,servers,tasks);
+
        newList.addAll(crossChromosomes);
        map.put("immature",newList);
        return map;

@@ -6,4 +6,6 @@ public class GAConfiguration {
     public static int server_exceeding_speed_range = 40;
 
     public static int task_using_time_range = 100;
+
+    public static int sample_number = 1000;
 }
