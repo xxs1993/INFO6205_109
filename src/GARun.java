@@ -3,6 +3,7 @@ import java.util.*;
 public class GARun {
    private static final List<Task> tasks = new ArrayList<>();
    private static final List<Server> servers = new ArrayList<>();
+   private Map<String,List<Chromosome>> map = new HashMap<>();
    private int taskNum;
    private int serverNum;
    private int solutionNum ;
@@ -39,6 +40,14 @@ public class GARun {
         this.solutionNum = solutionNum;
     }
 
+    public Map<String, List<Chromosome>> getMap() {
+        return map;
+    }
+
+    public void setMap(Map<String, List<Chromosome>> map) {
+        this.map = map;
+    }
+
     public GARun(int taskNum, int serverNum, int solutionNum){
        this.taskNum = taskNum;
        this.serverNum = serverNum;
@@ -50,6 +59,9 @@ public class GARun {
        for(int j = 0;j< serverNum ;j++){
            servers.add(new Server(taskNum,j));
        }
+        List<Chromosome> chromosomes = initChromosomes();
+        map.put("immature",new ArrayList<>());
+        map.put("mature",chromosomes);
    }
 
     /**
@@ -58,8 +70,7 @@ public class GARun {
      */
    private List<Chromosome> initChromosomes( ){
        List<Chromosome> list = new ArrayList<>();
-       Map<String,List<Chromosome>> map = new HashMap<>();
-       for(int i=0;i<GAConfiguration.sample_number*2;i++){
+       for(int i=0;i<(GAConfiguration.sample_number);i++){
            list.add(buildChromosome());
        }
        return list;
@@ -88,22 +99,19 @@ public class GARun {
      * @return
      */
    public List<Chromosome> getSolutions(){
-       List<Chromosome> chromosomes = initChromosomes();
-       Map<String,List<Chromosome>> map = new HashMap<>();
-       map.put("immature",new ArrayList<>());
-       map.put("mature",chromosomes);
+
        for (int i = 0;i < GAConfiguration.recursiveTimes;i++){
            map = breed(map);
            map = mature(map);
            map = survive(map);
        }
-       chromosomes = map.get("mature");
+       List<Chromosome>  chromosomes = map.get("mature");
        chromosomes.addAll(map.get("toBeMature"));
-       chromosomes.sort(null);
-       return chromosomes.subList(chromosomes.size()-solutionNum,chromosomes.size());
+       chromosomes.sort((x1,x2)->x2.getCollocationDegree()-x1.getCollocationDegree());
+       return chromosomes.subList(0,solutionNum);
    }
 
-    private Map<String,List<Chromosome>> survive(Map<String,List<Chromosome>> map){
+    public Map<String,List<Chromosome>> survive(Map<String,List<Chromosome>> map){
        map.put("mature",survive(map.get("mature")));
        return map;
     }
@@ -125,7 +133,7 @@ public class GARun {
             return result;
    }
 
-   private Map<String,List<Chromosome>> mature(Map<String,List<Chromosome>> map){
+   public Map<String,List<Chromosome>> mature(Map<String,List<Chromosome>> map){
        List<Chromosome> matureList = map.get("mature");
        if(matureList == null) matureList = new ArrayList<>();
        List<Chromosome> immatureList = map.get("toBeMature");
@@ -142,7 +150,7 @@ public class GARun {
      * @param map
      * @return
      */
-   private Map<String,List<Chromosome>> breed(Map<String,List<Chromosome>> map){
+   public Map<String,List<Chromosome>> breed(Map<String,List<Chromosome>> map){
        List<Chromosome> newList = new ArrayList<>();
        List<Chromosome> list = map.get("mature");
        list.sort(null);

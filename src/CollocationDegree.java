@@ -11,12 +11,7 @@ public class CollocationDegree {
             int usingTime = task.getUsingTime();
             int speed = server.getExecutingSpeedList().get(i);
             //TODO:
-            double time;
-            if(speed == 0){
-                time = Integer.MAX_VALUE/10;
-            }else {
-                time  =new Double(usingTime) ;
-            }
+            double time  =new Double(usingTime)/new Double(speed);
             if (map.get(server.getId()) == null) {
                 map.put(server.getId(), time);
                 continue;

@@ -1,6 +1,5 @@
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -28,9 +27,11 @@ public class Reproduction {
     private static List<Chromosome> pick (List<Chromosome> list){
         List<Chromosome> result = new ArrayList<>();
         Random random = new Random();
-        while(result.size() <list.size()/2){
-            Chromosome c1 = list.get(random.nextInt(list.size()));
-            Chromosome c2 = list.get(random.nextInt(list.size()));
+        int size = list.size();
+        while(result.size() <size/2){
+            int newSize = list.size();
+            Chromosome c1 = list.get(random.nextInt(newSize));
+            Chromosome c2 = list.get(random.nextInt(newSize));
             if(c1.getCollocationDegree()>=c2.getCollocationDegree()){
                 result.add(c1);
                 list.remove(c1);
