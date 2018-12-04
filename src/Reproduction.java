@@ -16,8 +16,10 @@ public class Reproduction {
             //List<Chromosome> newlist = new ;
             Chromosome son1 = getNextGeneration(fa, ma, server);
             son1.setCollocationDegree(CollocationDegree.getCollocationDegreeByGenes(son1.getGenes(), task));
+            son1.setPhenotypes(Phenotype.decode(son1.getGenes(),task));
             Chromosome son2 = getNextGeneration(fa, ma, server);
             son2.setCollocationDegree(CollocationDegree.getCollocationDegreeByGenes(son2.getGenes(), task));
+            son1.setPhenotypes(Phenotype.decode(son2.getGenes(),task));
             newlist.add(son1);
             newlist.add(son2);
         }

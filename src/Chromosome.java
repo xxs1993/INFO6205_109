@@ -7,8 +7,18 @@ public class Chromosome implements Comparable<Chromosome> {
     // server  list
     private List<Server> genes;
 
+    private List<Double> phenotypes;
+
     public int getCollocationDegree() {
         return collocationDegree;
+    }
+
+    public List<Double> getPhenotypes() {
+        return phenotypes;
+    }
+
+    public void setPhenotypes(List<Double> phenotypes) {
+        this.phenotypes = phenotypes;
     }
 
     public void setCollocationDegree(int collocationDegree) {

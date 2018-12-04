@@ -65,6 +65,7 @@ public void testFitness() throws Exception {
     chromosomes.add(c1);
     List<Chromosome> list = CollocationDegree.fitness(chromosomes);
     Assert.assertNotNull(list);
+    Assert.assertEquals(2,list.size());
 } 
 
 

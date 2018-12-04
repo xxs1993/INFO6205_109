@@ -88,6 +88,7 @@ public class GARun {
            int index = random.nextInt(serverNum);
            genes.add(servers.get(index));
        }
+       chromosome.setPhenotypes(Phenotype.decode(genes,tasks));
        chromosome.setGenes(genes);
        chromosome.setCollocationDegree(CollocationDegree.getCollocationDegreeByGenes(genes,tasks));
        return chromosome;
