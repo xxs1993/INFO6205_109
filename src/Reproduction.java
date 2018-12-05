@@ -26,7 +26,7 @@ public class Reproduction {
         return pick(newlist);
     }
 
-    private static List<Chromosome> pick (List<Chromosome> list){
+    public static List<Chromosome> pick (List<Chromosome> list){
         List<Chromosome> result = new ArrayList<>();
         Random random = new Random();
         int size = list.size();
@@ -45,14 +45,14 @@ public class Reproduction {
         return result;
     }
 
-    private static Chromosome getNextGeneration(Chromosome fa , Chromosome mo,List<Server> server){
+    public static Chromosome getNextGeneration(Chromosome fa , Chromosome mo,List<Server> server){
         Chromosome son;
         son = crossover(fa , mo);
         son = mutate(son,server);
         return son;
     }
 
-    private static Chromosome mutate(Chromosome son, List<Server> server){
+    public static Chromosome mutate(Chromosome son, List<Server> server){
         Random random = new Random();
         int serverN = server.size();
         Server newserver;
@@ -71,7 +71,7 @@ public class Reproduction {
         return son;
     }
 
-    private static Chromosome crossover(Chromosome fa , Chromosome mo){
+    public static Chromosome crossover(Chromosome fa , Chromosome mo){
         int N=0;
         Chromosome son = new Chromosome();
         Random random = new Random();
