@@ -54,18 +54,15 @@ public void testGetCollocationDegreeByGenes() throws Exception {
 @Test
 public void testFitness() throws Exception { 
 //TODO: Test goes here...
-    List<Chromosome> chromosomes = new ArrayList<>();
-    Chromosome c1 = new Chromosome();
-    List<Server> genes = new ArrayList<>();
-    for(int i=0;i< gaRun.getTaskNum();i++){
-        genes.add(gaRun.getServers().get(i));
+    List<Chromosome> oriList = gaRun.getMap().get("mature");
+    oriList.sort(null);
+    int midFitness = oriList.get(oriList.size()/2).getCollocationDegree();
+    int avgFitness = 0;
+    for(int i =0;i<50;i++){
+        List<Chromosome> list = CollocationDegree.fitness(oriList);
+        avgFitness = list.get(0).getCollocationDegree() + list.get(1).getCollocationDegree()+avgFitness;
     }
-    c1.setGenes(genes);
-    c1.setCollocationDegree(CollocationDegree.getCollocationDegreeByGenes(genes,gaRun.getTasks()));
-    chromosomes.add(c1);
-    List<Chromosome> list = CollocationDegree.fitness(chromosomes);
-    Assert.assertNotNull(list);
-    Assert.assertEquals(2,list.size());
+    Assert.assertTrue(avgFitness/100>midFitness);
 } 
 
 
