@@ -145,7 +145,7 @@ public class MainFrame extends javax.swing.JFrame {
         System.out.printf("end");
         List<String> list1 = new ArrayList<>();
         list1.add("Task using time:");
-        String[] tasks = gaRun.getTasks().stream().map(x->String.valueOf(x.getUsingTime()))
+        String[] tasks = gaRun.getTasks().stream().map(x->String.valueOf(x.getWorkload()))
                 .toArray(size->new String[size]);
         list1.add(Arrays.toString(tasks));
         list1.add("Servers exceeding speeds :");
@@ -155,10 +155,10 @@ public class MainFrame extends javax.swing.JFrame {
         for(Chromosome chromosome :list){
             int[] idList = chromosome.getGenes().stream().mapToInt(Server ::getId).toArray();
 
-            list1.add(Arrays.toString(idList) + " degree : "+ chromosome.getCollocationDegree());
+            list1.add(Arrays.toString(idList) + " degree : "+ chromosome.getFitness());
         }
         String fileName = FileUtil.writeData(list1);
-        JOptionPane.showMessageDialog(null,"Finished and fileName is : " +fileName,"Info",JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null,"Finished and fileName is : "+fileName ,"Info",JOptionPane.INFORMATION_MESSAGE);
         start.setText("Start");
         start.setEnabled(true);
     }//GEN-LAST:event_startActionPerformed

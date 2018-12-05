@@ -10,15 +10,15 @@ public class Reproduction {
     public static List<Chromosome> getNextGeneration(List<Chromosome> list, List<Server> server, List<Task> task){
          List<Chromosome> newlist = new ArrayList<>();
         for(int i=0;i<list.size();i++) {
-            List<Chromosome> temlist = CollocationDegree.fitness(list);
+            List<Chromosome> temlist = Fitness.fitness(list);
             Chromosome fa = temlist.get(0);
             Chromosome ma = temlist.get(1);
             //List<Chromosome> newlist = new ;
             Chromosome son1 = getNextGeneration(fa, ma, server);
-            son1.setCollocationDegree(CollocationDegree.getCollocationDegreeByGenes(son1.getGenes(), task));
+            son1.setFitness(Fitness.getCollocationDegreeByGenes(son1.getGenes(), task));
             son1.setPhenotypes(Phenotype.decode(son1.getGenes(),task));
             Chromosome son2 = getNextGeneration(fa, ma, server);
-            son2.setCollocationDegree(CollocationDegree.getCollocationDegreeByGenes(son2.getGenes(), task));
+            son2.setFitness(Fitness.getCollocationDegreeByGenes(son2.getGenes(), task));
             son1.setPhenotypes(Phenotype.decode(son2.getGenes(),task));
             newlist.add(son1);
             newlist.add(son2);
@@ -34,7 +34,7 @@ public class Reproduction {
             int newSize = list.size();
             Chromosome c1 = list.get(random.nextInt(newSize));
             Chromosome c2 = list.get(random.nextInt(newSize));
-            if(c1.getCollocationDegree()>=c2.getCollocationDegree()){
+            if(c1.getFitness()>=c2.getFitness()){
                 result.add(c1);
                 list.remove(c1);
             } else {

@@ -1,14 +1,13 @@
-import java.util.List;
 import java.util.Random;
 
 public class Task {
-    private int usingTime;
+    private int workload;
 
     private int id;
 
     public Task(int id){
         Random random = new Random();
-        this.usingTime =random.nextInt(GAConfiguration.task_using_time_range)+1;
+        this.workload =random.nextInt(GAConfiguration.task_using_time_range)+1;
         this.id = id;
     }
 
@@ -20,11 +19,11 @@ public class Task {
         this.id = id;
     }
 
-    public int getUsingTime() {
-        return usingTime;
+    public int getWorkload() {
+        return workload;
     }
 
-    public void setUsingTime(int usingTime) {
-        this.usingTime = usingTime;
+    public void setWorkload(int workload) {
+        this.workload = workload;
     }
 }

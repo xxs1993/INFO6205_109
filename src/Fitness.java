@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class CollocationDegree {
+public class Fitness {
 
     public static int getCollocationDegreeByGenes(List<Server> genes,List<Task> tasks) {
         //TODO:
@@ -8,7 +8,7 @@ public class CollocationDegree {
         for(int i = 0;i<genes.size();i++) {
             Task task = tasks.get(i);
             Server server = genes.get(i);
-            int usingTime = task.getUsingTime();
+            int usingTime = task.getWorkload();
             int speed = server.getExecutingSpeedList().get(i);
             //TODO:
             double time  =new Double(usingTime)/new Double(speed);
@@ -41,7 +41,7 @@ public class CollocationDegree {
         double[] range = new double[list.size()];
         for(int i = 0;i<list.size();i++){
             Chromosome chromosome = list.get(i);
-            collocationDegreeSum = chromosome.getCollocationDegree()+ collocationDegreeSum;
+            collocationDegreeSum = chromosome.getFitness()+ collocationDegreeSum;
             range[i] = collocationDegreeSum;
         }
         double r1 = collocationDegreeSum * Math.random();

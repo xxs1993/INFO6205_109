@@ -2,15 +2,15 @@ import java.util.List;
 
 public class Chromosome implements Comparable<Chromosome> {
 
-    private int collocationDegree;
+    private int fitness;
 
     // server  list
     private List<Server> genes;
 
     private List<Double> phenotypes;
 
-    public int getCollocationDegree() {
-        return collocationDegree;
+    public int getFitness() {
+        return fitness;
     }
 
     public List<Double> getPhenotypes() {
@@ -21,8 +21,8 @@ public class Chromosome implements Comparable<Chromosome> {
         this.phenotypes = phenotypes;
     }
 
-    public void setCollocationDegree(int collocationDegree) {
-        this.collocationDegree = collocationDegree;
+    public void setFitness(int fitness) {
+        this.fitness = fitness;
     }
 
     public List<Server> getGenes() {
@@ -35,6 +35,6 @@ public class Chromosome implements Comparable<Chromosome> {
 
     @Override
     public int compareTo(Chromosome chromosome){
-        return this.collocationDegree - chromosome.collocationDegree;
+        return this.fitness - chromosome.fitness;
     }
 }

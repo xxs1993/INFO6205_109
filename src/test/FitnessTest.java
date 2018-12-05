@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** 
-* CollocationDegree Tester. 
+* Fitness Tester.
 * 
 * @author <Authors name> 
 * @since <pre>Dec 2, 2018</pre> 
 * @version 1.0 
 */ 
-public class CollocationDegreeTest {
+public class FitnessTest {
 
     private GARun gaRun;
 
@@ -40,8 +40,8 @@ public void testGetCollocationDegreeByGenes() throws Exception {
     }
     List<Server> genes2 = genes;
 
-    int degree =  CollocationDegree.getCollocationDegreeByGenes(genes,gaRun.getTasks());
-    int degree2 = CollocationDegree.getCollocationDegreeByGenes(genes2,gaRun.getTasks());
+    int degree =  Fitness.getCollocationDegreeByGenes(genes,gaRun.getTasks());
+    int degree2 = Fitness.getCollocationDegreeByGenes(genes2,gaRun.getTasks());
     Assert.assertTrue(degree >0);
     Assert.assertEquals(degree,degree2);
 } 
@@ -56,11 +56,11 @@ public void testFitness() throws Exception {
 //TODO: Test goes here...
     List<Chromosome> oriList = gaRun.getMap().get("mature");
     oriList.sort(null);
-    int midFitness = oriList.get(oriList.size()/2).getCollocationDegree();
+    int midFitness = oriList.get(oriList.size()/2).getFitness();
     int avgFitness = 0;
     for(int i =0;i<50;i++){
-        List<Chromosome> list = CollocationDegree.fitness(oriList);
-        avgFitness = list.get(0).getCollocationDegree() + list.get(1).getCollocationDegree()+avgFitness;
+        List<Chromosome> list = Fitness.fitness(oriList);
+        avgFitness = list.get(0).getFitness() + list.get(1).getFitness()+avgFitness;
     }
     Assert.assertTrue(avgFitness/100>midFitness);
 } 
@@ -82,9 +82,9 @@ public void testGetSelectedIndex() throws Exception {
     range[2] = 15;
     range[3] = 20;
     range[4] = 25;
-    int index = CollocationDegree.getSelectedIndex(range,14);
-    int index2 = CollocationDegree.getSelectedIndex(range,24);
-    int index3 = CollocationDegree.getSelectedIndex(range,15);
+    int index = Fitness.getSelectedIndex(range,14);
+    int index2 = Fitness.getSelectedIndex(range,24);
+    int index3 = Fitness.getSelectedIndex(range,15);
 
     Assert.assertEquals(2,index);
     Assert.assertEquals(4,index2);

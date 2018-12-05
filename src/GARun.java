@@ -90,8 +90,17 @@ public class GARun {
        }
        chromosome.setPhenotypes(Phenotype.decode(genes,tasks));
        chromosome.setGenes(genes);
-       chromosome.setCollocationDegree(CollocationDegree.getCollocationDegreeByGenes(genes,tasks));
+       chromosome.setFitness(Fitness.getCollocationDegreeByGenes(genes,tasks));
        return chromosome;
+   }
+
+   private double getAverageDegree(List<Chromosome> mature){
+       mature.sort(null);
+       double avargeDegree = 0;
+       for(int i = mature.size()-300;i<mature.size();i++){
+           avargeDegree = avargeDegree + mature.get(i).getFitness();
+       }
+       return avargeDegree/300;
    }
 
 
@@ -101,14 +110,25 @@ public class GARun {
      */
    public List<Chromosome> getSolutions(){
 
+       double averageFitness = getAverageDegree(map.get("mature")) ;
+       boolean isPrint = false;
        for (int i = 0;i < GAConfiguration.recursiveTimes;i++){
            map = breed(map);
            map = mature(map);
            map = survive(map);
+           double newFitness = getAverageDegree(map.get("mature"));
+           if(Math.abs(newFitness - averageFitness)/averageFitness < 0.0001 && !isPrint){
+               System.out.println(" The result is convergent in generation : "+i);
+               break;
+//               isPrint = true;
+           }
+           averageFitness = newFitness;
        }
        List<Chromosome>  chromosomes = map.get("mature");
        chromosomes.addAll(map.get("toBeMature"));
-       chromosomes.sort((x1,x2)->x2.getCollocationDegree()-x1.getCollocationDegree());
+       chromosomes.sort((x1,x2)->x2.getFitness()-x1.getFitness());
+       if(solutionNum > chromosomes.size())return chromosomes;
+       System.out.println(averageFitness);
        return chromosomes.subList(0,solutionNum);
    }
 
@@ -123,7 +143,7 @@ public class GARun {
             while(result.size() < GAConfiguration.sample_number/2){
                 Chromosome c1 = list.get(random.nextInt(list.size()));
                 Chromosome c2 = list.get(random.nextInt(list.size()));
-                if(c1.getCollocationDegree()>=c2.getCollocationDegree()){
+                if(c1.getFitness()>=c2.getFitness()){
                     result.add(c1);
                     list.remove(c1);
                 } else {

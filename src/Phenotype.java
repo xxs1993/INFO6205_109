@@ -7,7 +7,7 @@ public class Phenotype {
         List<Double> phenotype = new ArrayList<>();
         for(int i = 0; i< genes.size();i++){
             Server server = genes.get(i);
-            phenotype.add(new Double(tasks.get(i).getUsingTime())/new Double(server.getExecutingSpeedList().get(i)));
+            phenotype.add(new Double(tasks.get(i).getWorkload())/new Double(server.getExecutingSpeedList().get(i)));
         }
         return phenotype;
     }

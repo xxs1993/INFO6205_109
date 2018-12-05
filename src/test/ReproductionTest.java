@@ -159,7 +159,7 @@ public class ReproductionTest {
             gene1.add(server.get(i%5));
         }
         chromosome1.setGenes(gene1);
-        chromosome1.setCollocationDegree(CollocationDegree.getCollocationDegreeByGenes(chromosome1.getGenes(),task));
+        chromosome1.setFitness(Fitness.getCollocationDegreeByGenes(chromosome1.getGenes(),task));
 
         Chromosome chromosome2 = new Chromosome();
         List<Server> gene2 = new ArrayList<Server>();
@@ -167,7 +167,7 @@ public class ReproductionTest {
             gene2.add(server.get(i%3));
         }
         chromosome2.setGenes(gene1);
-        chromosome2.setCollocationDegree(CollocationDegree.getCollocationDegreeByGenes(chromosome2.getGenes(),task));
+        chromosome2.setFitness(Fitness.getCollocationDegreeByGenes(chromosome2.getGenes(),task));
 
         Chromosome chromosome3 = new Chromosome();
         List<Server> gene3 = new ArrayList<Server>();
@@ -175,7 +175,7 @@ public class ReproductionTest {
             gene3.add(server.get(i%2));
         }
         chromosome3.setGenes(gene1);
-        chromosome3.setCollocationDegree(CollocationDegree.getCollocationDegreeByGenes(chromosome3.getGenes(),task));
+        chromosome3.setFitness(Fitness.getCollocationDegreeByGenes(chromosome3.getGenes(),task));
 
         Chromosome chromosome4 = new Chromosome();
         List<Server> gene4 = new ArrayList<Server>();
@@ -183,7 +183,7 @@ public class ReproductionTest {
             gene4.add(server.get(i%7));
         }
         chromosome4.setGenes(gene1);
-        chromosome4.setCollocationDegree(CollocationDegree.getCollocationDegreeByGenes(chromosome4.getGenes(),task));
+        chromosome4.setFitness(Fitness.getCollocationDegreeByGenes(chromosome4.getGenes(),task));
 
         Chromosome chromosome5 = new Chromosome();
         List<Server> gene5 = new ArrayList<Server>();
@@ -191,7 +191,7 @@ public class ReproductionTest {
             gene5.add(server.get(i%8));
         }
         chromosome5.setGenes(gene1);
-        chromosome5.setCollocationDegree(CollocationDegree.getCollocationDegreeByGenes(chromosome5.getGenes(),task));
+        chromosome5.setFitness(Fitness.getCollocationDegreeByGenes(chromosome5.getGenes(),task));
 
         list.add(chromosome1);
         list.add(chromosome2);
