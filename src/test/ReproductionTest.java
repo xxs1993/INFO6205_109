@@ -167,8 +167,8 @@ public class ReproductionTest {
             Task t = new Task(i);
             task.add(t);
         }
-        for(int j=0;j<10;j++){
-            Server s = new Server(j,j);
+        for(int j=0;j<5;j++){
+            Server s = new Server(10,j);
             server.add(s);
         }
 
@@ -184,7 +184,7 @@ public class ReproductionTest {
         }
         chromosome1.setGenes(gene1);
 
-        //chromosome1.setFitness(Fitness.getCollocationDegreeByGenes(chromosome1.getGenes(),task));
+        chromosome1.setFitness(Fitness.getCollocationDegreeByGenes(chromosome1.getGenes(),task));
 
         Chromosome chromosome2 = new Chromosome();
         List<Server> gene2 = new ArrayList<Server>();
@@ -199,7 +199,7 @@ public class ReproductionTest {
             {gene2.add(server.get(i-8));}
         }
         chromosome2.setGenes(gene2);
-        //chromosome2.setFitness(Fitness.getCollocationDegreeByGenes(chromosome2.getGenes(),task));
+        chromosome2.setFitness(Fitness.getCollocationDegreeByGenes(chromosome2.getGenes(),task));
 
         Chromosome chromosome3 = new Chromosome();
         List<Server> gene3 = new ArrayList<Server>();
@@ -214,7 +214,7 @@ public class ReproductionTest {
                 {gene3.add(server.get(i-7));}
         }
         chromosome3.setGenes(gene3);
-        //chromosome3.setFitness(Fitness.getCollocationDegreeByGenes(chromosome3.getGenes(),task));
+        chromosome3.setFitness(Fitness.getCollocationDegreeByGenes(chromosome3.getGenes(),task));
 
         Chromosome chromosome4 = new Chromosome();
         List<Server> gene4 = new ArrayList<Server>();
@@ -229,7 +229,7 @@ public class ReproductionTest {
                 {gene4.add(server.get(i-7));}
         }
         chromosome4.setGenes(gene4);
-        //chromosome4.setFitness(Fitness.getCollocationDegreeByGenes(chromosome4.getGenes(),task));
+        chromosome4.setFitness(Fitness.getCollocationDegreeByGenes(chromosome4.getGenes(),task));
 
         Chromosome chromosome5 = new Chromosome();
         List<Server> gene5 = new ArrayList<Server>();
@@ -244,7 +244,7 @@ public class ReproductionTest {
                 {gene5.add(server.get(i-6));}
         }
         chromosome5.setGenes(gene5);
-        //chromosome5.setFitness(Fitness.getCollocationDegreeByGenes(chromosome5.getGenes(),task));
+        chromosome5.setFitness(Fitness.getCollocationDegreeByGenes(chromosome5.getGenes(),task));
 
         list.add(chromosome1);
         list.add(chromosome2);
@@ -252,12 +252,12 @@ public class ReproductionTest {
         list.add(chromosome4);
         list.add(chromosome5);
 
-       // List<Chromosome> result;
-       // result = Reproduction.getNextGeneration(list,server,task);
+       List<Chromosome> result;
+       result = Reproduction.getNextGeneration(list,server,task);
 
 
-        //assertEquals(list.size(),result.size());
+        assertEquals(list.size(),result.size());
 
-        assertEquals(10,chromosome1.getGenes().size());
+        //assertEquals(10,chromosome1.getGenes().size());
     }
 }
